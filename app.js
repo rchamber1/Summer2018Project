@@ -20,8 +20,8 @@ const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 // Create the client
 const client = new Client(
   'default',
-  'ws://70.95.45.125:46657/subsocket',
-  "ws://70.95.45.125:9999/queryws",
+  'ws://localhost:46657/websocket',
+  "ws://localhost:9999/queryws",
 );
 
 // The address for the caller of the function
@@ -42,15 +42,15 @@ const contract = new web3.eth.Contract(ABI, contractAddress, {from});
 console.log("CONTRACT");
 console.log(contract);
 
-const loomContractAddress = client.getContractAddressAsync("SimpleStore")
-console.log(loomContractAddress);
+//const loomContractAddress = client.getContractAddressAsync("SimpleStore")
+//console.log(loomContractAddress);
 
-const tx = contract.methods.set(47).send();
-console.log("TX");
-console.log(tx);
-const value = contract.methods.get().call();
-console.log("VALUE");
-console.log(value);
+//const tx = contract.methods.set(47).send();
+//console.log("TX");
+//console.log(tx);
+//const value = contract.methods.get().call();
+//console.log("VALUE");
+//console.log(value);
 
 contract.events.NewValueSet({}, (err, event) => {
   if(err) {
