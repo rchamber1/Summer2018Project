@@ -46,19 +46,26 @@ console.log(contract);
 //const loomContractAddress = client.getContractAddressAsync("SimpleStore")
 //console.log(loomContractAddress);
 
-//const tx = contract.methods.set(47).send();
-//console.log("TX");
-//console.log(tx);
-//const value = contract.methods.get().call();
-//console.log("VALUE");
-//console.log(value);
-
 contract.events.NewValueSet({}, (err, event) => {
   if(err) {
     return console.error(err);
   }
   console.log('New value set', event.returnValues._value);
 });
+
+(async function () {
+  // Set value of 47
+  const info = await contract.methods.set(47).send()
+  console.log("INFO:")
+  console.log(info)
+
+  // Get the value
+  const result = await contract.methods.get().call()
+  // result should be 47
+  console.log("RESULT should be 47:")
+  console.log(result)
+})()
+
 
 /* End of Web3 and Loom stuff */
 
