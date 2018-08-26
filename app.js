@@ -20,6 +20,7 @@ const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 // Create the client
 const client = new Client(
   'default',
+  // have yet to actually get this working externally
   'ws://localhost:46657/websocket',
   "ws://localhost:9999/queryws",
 );
