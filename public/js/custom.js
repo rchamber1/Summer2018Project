@@ -1,7 +1,11 @@
 $(document).ready(() => {
     console.log("jQuery working!");
 
-    $("button").click(() => {
-        console.log("Button clicked!");
+    $("#setBtn").click(() => {
+        console.log("Set button clicked!");
+    });
+
+    $("#getBtn").click(() => {
+        console.log("Get button clicked!");
     });
 });

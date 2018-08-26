@@ -2,13 +2,11 @@
   "name": "persona-builder",
   "version": "0.0.1",
   "author": "Ryan Chambers",
-
   "repository": {
     "type": "git",
     "url": "https://github.com/rchamber1/Summer2018Project.git"
   },
   "license": "MIT",
-
   "private": true,
   "scripts": {
     "start": "nodemon app.js"
@@ -16,10 +14,19 @@
   "dependencies": {
     "express": "3.x",
     "express3-handlebars": "*",
+    "loom-js": "^1.17.0",
     "mongodb": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "web3": "^1.0.0-beta.35"
   },
   "engines": {
     "node": "8.10.x"
-  }  
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "webpack": "^4.17.1"
+  }
 }
