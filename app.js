@@ -12,17 +12,20 @@ var handlebars = require('express3-handlebars');
 
 // const Web3 = require('web3');
 import Web3 from 'web3';
-import {Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js';
+import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js';
 
 const privateKey = CryptoUtils.generatePrivateKey();
 const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
 
 // Create the client
+// TODO: Get rid of the secret here. There should be no commiting of secrets to code,
+// TODO: especially a public repo like this. Needs to be injected through a config file.
+const clientIp = "192.168.86.72"
 const client = new Client(
   'default',
   // have yet to actually get this working externally
-  'ws://localhost:46657/websocket',
-  "ws://localhost:9999/queryws",
+  `ws://${clientIp}:46657/websocket`,
+  `ws://${clientIp}:9999/queryws`,
 );
 
 // The address for the caller of the function
