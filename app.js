@@ -12,6 +12,7 @@ var handlebars = require('express3-handlebars');
 
 // const Web3 = require('web3');
 import Web3 from 'web3';
+import SimpleStore from './public/SimpleStore.json';
 import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js';
 
 const privateKey = CryptoUtils.generatePrivateKey();
@@ -33,10 +34,12 @@ const from = LocalAddress.fromPublicKey(publicKey).toString();
 
 // Instantiate Web3 client using LoomProvider
 const web3 = new Web3(new LoomProvider(client, privateKey));
+// TODO: Use a real logger lib instead of the console logger.
+// TODO: Needs to be able to specify log_level so we can control output
 console.log("CURRENT PROVIDER");
 console.log(web3.currentProvider);
 
-const ABI = require('./public/SimpleStore.json')['abi'];
+const ABI = SimpleStore.abi;
 console.log(ABI);
 
 const contractAddress = '0x1a31b9b9d281d49001fe7f3f638000a739afc9c3';
