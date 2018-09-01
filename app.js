@@ -54,22 +54,6 @@ function registerContractEvents(contract) {
   });
 }
 
-function initApp() {
-  window.addEventListener('load', function() {
-    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-    if (typeof web3 !== 'undefined') {
-      console.log('Cannot use current web3 provider. Initializing Loom Provider...');
-    }
-    // TODO: Get rid of the host here. There should be no commiting of secrets to code,
-    //       especially a public repo like this. Needs to be injected through a config file.
-    const clientHost = "192.168.86.72";
-    setWeb3Provider(createLoomClient(clientHost));
-    const contractAddress = '0x1a31b9b9d281d49001fe7f3f638000a739afc9c3';
-    registerContractEvents(setContract(contractAddress, SimpleStore.abi));
-    startApp();
-  })
-}
-
 function startApp() {
   var index = require('./routes/index');
   // Example route
@@ -110,4 +94,16 @@ function startServer() {
   });
 }
 
-initApp();
+window.addEventListener('load', function() {
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    console.log('Cannot use current web3 provider. Initializing Loom Provider...');
+  }
+  // TODO: Get rid of the host here. There should be no commiting of secrets to code,
+  //       especially a public repo like this. Needs to be injected through a config file.
+  const clientHost = "192.168.86.72";
+  setWeb3Provider(createLoomClient(clientHost));
+  const contractAddress = '0x1a31b9b9d281d49001fe7f3f638000a739afc9c3';
+  registerContractEvents(setContract(contractAddress, SimpleStore.abi));
+  startApp();
+})
