@@ -8,10 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
 
-// TODO: Figure out how to use web3js in 'public/js/custom.js' for async await calls
-var web3js;
-var privateKey;
-var publicKey;
+var personaContract;
 
 /* Web3 and Loom dealio  */
 
@@ -36,7 +33,6 @@ function startApp() {
   app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-  app.locals.web3 = web3js;
 
   // development only
   if ('development' == app.get('env')) {
@@ -61,9 +57,9 @@ window.addEventListener('load', function() {
   if (typeof web3 !== 'undefined') {
     console.log('Cannot use current web3 provider. Initializing Loom Provider...');
   }
-  // TODO: Get rid of the host here. There should be no commiting of secrets to code,
-  //       especially a public repo like this. Needs to be injected through a config file.
-  // TODO: INSTANTIATE THE PERSONA CONTRACT
+
+  personaConstract = new PersonaContract();
+  await personaContract.initialize();
   personaContract.registerContractEvents();
   startApp();
 })
