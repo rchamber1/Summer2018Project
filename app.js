@@ -14,45 +14,6 @@ var privateKey;
 var publicKey;
 
 /* Web3 and Loom dealio  */
-import Web3 from 'web3';
-import SimpleStore from './public/SimpleStore.json';
-import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js';
-
-function createLoomClient(clientHost) {
-  return new Client(
-    'default',
-    `ws://${clientHost}:46657/websocket`,
-    `ws://${clientHost}:9999/queryws`,
-  );
-}
-
-function setWeb3Provider(loomClient) {
-  privateKey = CryptoUtils.generatePrivateKey();
-  publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey);
-  web3js = new Web3(new LoomProvider(loomClient, privateKey));
-}
-
-function setContract(address, ABI) {
-  // TODO: Use a real logger lib instead of the console logger.
-  //       Needs to be able to specify log_level so we can control output
-  console.log(ABI);
-  //const loomContractAddress = client.getContractAddressAsync("SimpleStore")
-  //console.log(loomContractAddress);
-  const from = LocalAddress.fromPublicKey(publicKey).toString(); // The address for the caller of the function
-  this.contract = new web3.eth.Contract(ABI, address, {from});
-  console.log("CONTRACT");
-  console.log(this.contract);
-  return this.contract;
-}
-
-function registerContractEvents(contract) {
-  contract.events.NewValueSet({}, (err, event) => {
-    if(err) {
-      return console.error(err);
-    }
-    console.log('New value set', event.returnValues._value);
-  });
-}
 
 function startApp() {
   var index = require('./routes/index');
@@ -102,10 +63,7 @@ window.addEventListener('load', function() {
   }
   // TODO: Get rid of the host here. There should be no commiting of secrets to code,
   //       especially a public repo like this. Needs to be injected through a config file.
-  const clientHost = "192.168.86.72";
-  setWeb3Provider(createLoomClient(clientHost));
-  const loomContractAddress = await client.getContractAddressAsync('SimpleStore');
-  const contractAddress = CryptoUtils.bytesToHexAddr(loomContractAddress.local.bytes)
-  registerContractEvents(setContract(contractAddress, SimpleStore.abi));
+  // TODO: INSTANTIATE THE PERSONA CONTRACT
+  personaContract.registerContractEvents();
   startApp();
 })
