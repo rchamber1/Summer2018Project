@@ -13,11 +13,11 @@ export default class PersonaContract extends Contract {
   
   // TODO: Make this function register events from THIS contract!
   registerContractEvents() {
-    this.contract.events.NewValueSet({}, (err, event) => {
-      if(err) {
-        return console.error(err);
-      }
-      console.log('New value set', event.returnValues._value);
-    });
+    // this.contract.events.NewValueSet({}, (err, event) => {
+    //   if(err) {
+    //     return console.error(err);
+    //   }
+    //   console.log('New value set', event.returnValues._value);
+    // });
   }
 }
