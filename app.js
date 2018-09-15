@@ -39,10 +39,10 @@ function setContract(address, ABI) {
   //const loomContractAddress = client.getContractAddressAsync("SimpleStore")
   //console.log(loomContractAddress);
   const from = LocalAddress.fromPublicKey(publicKey).toString(); // The address for the caller of the function
-  const contract = new web3.eth.Contract(ABI, address, {from});
+  this.contract = new web3.eth.Contract(ABI, address, {from});
   console.log("CONTRACT");
-  console.log(contract);
-  return contract;
+  console.log(this.contract);
+  return this.contract;
 }
 
 function registerContractEvents(contract) {
@@ -75,6 +75,7 @@ function startApp() {
   app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+  app.locals.web3 = web3js;
 
   // development only
   if ('development' == app.get('env')) {
@@ -103,7 +104,8 @@ window.addEventListener('load', function() {
   //       especially a public repo like this. Needs to be injected through a config file.
   const clientHost = "192.168.86.72";
   setWeb3Provider(createLoomClient(clientHost));
-  const contractAddress = '0x1a31b9b9d281d49001fe7f3f638000a739afc9c3';
+  const loomContractAddress = await client.getContractAddressAsync('SimpleStore');
+  const contractAddress = CryptoUtils.bytesToHexAddr(loomContractAddress.local.bytes)
   registerContractEvents(setContract(contractAddress, SimpleStore.abi));
   startApp();
 })
