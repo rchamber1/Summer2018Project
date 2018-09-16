@@ -1,4 +1,4 @@
-import PersonaContract from './public/json/PersonaContract.json'
+import PersonaContract from './public/js/contracts/persona_contract.js'
 
 /**
  * Module dependencies.
@@ -59,7 +59,7 @@ window.addEventListener('load', function() {
   }
 
   personaConstract = new PersonaContract();
-  await personaContract.initialize();
+  personaContract.initialize();
   personaContract.registerContractEvents();
   startApp();
 })
