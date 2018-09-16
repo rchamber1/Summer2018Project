@@ -11,13 +11,12 @@ export default class PersonaContract extends Contract {
     super(PersonaContractJson.contractName, PersonaContractJson.abi);
   }
   
-  // TODO: Make this function register events from THIS contract!
   registerContractEvents() {
-    // this.contract.events.NewValueSet({}, (err, event) => {
-    //   if(err) {
-    //     return console.error(err);
-    //   }
-    //   console.log('New value set', event.returnValues._value);
-    // });
+    this.contract.events.NewPersona({}, (err, event) => {
+      if(err) {
+        return console.error(err);
+      }
+      console.log('New Persona created! Id: ', event.returnValues._personaId);
+    });
   }
 }
