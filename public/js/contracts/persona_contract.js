@@ -1,5 +1,5 @@
 import Contract from './contract.js';
-import PersonaContractJson from '../../json/PersonaContract.json';
+import PersonaTokenJson from '../../json/PersonaToken.json';
 
 export default class PersonaContract extends Contract {
 
@@ -8,7 +8,7 @@ export default class PersonaContract extends Contract {
   }
 
   async initialize() {
-    super(PersonaContractJson.contractName, PersonaContractJson.abi);
+    super(PersonaTokenJson.contractName, PersonaTokenJson.abi);
   }
   
   registerContractEvents() {
