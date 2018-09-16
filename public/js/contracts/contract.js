@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { Client, LocalAddress, CryptoUtils, LoomProvider } from 'loom-js';
-import LoomClientInfo from '../../json/loom-client-info.json';
+import LoomClientConfig from '../../json/loom-client-info.json';
 
 
 export default class Contract {
@@ -12,9 +12,10 @@ export default class Contract {
   }
 
   async initialize(name, abi) {
-    const clientHost = LoomClientInfo.clientHost;
-    setWeb3Provider(createLoomClient(clientHost));
-    const loomContractAddress = await client.getContractAddressAsync(name);
+    const clientHost = LoomClientConfig.clientHost;
+    this.client = createLoomClient(clientHost);
+    setWeb3Provider(this.client);
+    const loomContractAddress = await this.client.getContractAddressAsync(name);
     const contractAddress = CryptoUtils.bytesToHexAddr(loomContractAddress.local.bytes)
     setContract(contractAddress, abi)
   }
@@ -30,7 +31,7 @@ export default class Contract {
   setWeb3Provider(loomClient) {
     this.privateKey = CryptoUtils.generatePrivateKey();
     this.publicKey = CryptoUtils.publicKeyFromPrivateKey(this.privateKey);
-    web3js = new Web3(new LoomProvider(loomClient, this.privateKey));
+    web3 = new Web3(new LoomProvider(loomClient, this.privateKey));
   }
   
   setContract(address, ABI) {
