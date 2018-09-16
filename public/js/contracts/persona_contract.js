@@ -8,7 +8,7 @@ export default class PersonaContract extends Contract {
   }
 
   async initialize() {
-    super(PersonaTokenJson.contractName, PersonaTokenJson.abi);
+    super.initialize(PersonaTokenJson.contractName, PersonaTokenJson.abi);
   }
   
   registerContractEvents() {
