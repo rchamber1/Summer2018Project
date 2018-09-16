@@ -43,23 +43,21 @@ function startApp() {
   // Example route
   // app.get('/users', user.list);
 
-  startServer();
+  startServer(app);
 }
 
-function startServer() {
+function startServer(app) {
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Hi, User! Listening on port ' + app.get('port'));
   });
 }
 
-window.addEventListener('load', function() {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    console.log('Cannot use current web3 provider. Initializing Loom Provider...');
-  }
-
-  personaConstract = new PersonaContract();
-  personaContract.initialize();
+async function main() {
+  personaContract = new PersonaContract();
+  await personaContract.initialize();
+  console.log(personaContract);
   personaContract.registerContractEvents();
   startApp();
-})
+}
+
+main();
