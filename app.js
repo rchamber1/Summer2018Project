@@ -56,7 +56,7 @@ async function main() {
   personaContract = new PersonaContract();
   await personaContract.initialize();
   await personaContract.registerContractEvents();
-  await personaContract.createPersona("Justin");
+  await personaContract.createPersona('Justin');
   startApp();
 }
 
