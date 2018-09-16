@@ -55,8 +55,8 @@ function startServer(app) {
 async function main() {
   personaContract = new PersonaContract();
   await personaContract.initialize();
-  console.log(personaContract);
-  personaContract.registerContractEvents();
+  await personaContract.registerContractEvents();
+  await personaContract.createPersona("Justin");
   startApp();
 }
 

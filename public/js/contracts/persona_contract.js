@@ -12,13 +12,19 @@ export default class PersonaContract extends Contract {
     await super.initialize(PersonaTokenJson.contractName, PersonaTokenJson.abi);
     console.log('PersonaContract: initialize complete')
   }
+
+  async createPersona(name) {
+    await this.contract.methods.createPersona(name).send();
+  }
   
-  registerContractEvents() {
+  async registerContractEvents() {
     this.contract.events.NewPersona({}, (err, event) => {
       if(err) {
+        console.log('ERROR!')
         return console.error(err);
       }
-      console.log('New Persona created! Id: ', event.returnValues._personaId);
+      console.log('New Persona created!', event.returnValues);
     });
+    console.log('REGISTERED EVENTS')
   }
 }

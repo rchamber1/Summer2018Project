@@ -22,14 +22,14 @@ export default class Contract {
     this.privateKey = CryptoUtils.generatePrivateKey();
     this.publicKey = CryptoUtils.publicKeyFromPrivateKey(this.privateKey);
     this.web3 = new Web3(new LoomProvider(loomClient, this.privateKey));
+    this.from = LocalAddress.fromPublicKey(this.publicKey).toString(); // The address for the caller of the function
   }
   
   setContract(address, ABI) {
     // TODO: Use a real logger lib instead of the console logger.
     //       Needs to be able to specify log_level so we can control output
     console.log(ABI);
-    const from = LocalAddress.fromPublicKey(this.publicKey).toString(); // The address for the caller of the function
-    this.contract = new this.web3.eth.Contract(ABI, address, {from});
+    this.contract = new this.web3.eth.Contract(ABI, address, {from: this.from});
     console.log("CONTRACT");
     console.log(this.contract);
   }
@@ -42,6 +42,7 @@ export default class Contract {
     const loomContractAddress = await this.client.getContractAddressAsync(name)
     const contractAddress = CryptoUtils.bytesToHexAddr(loomContractAddress.local.bytes)
     console.log('LOOM CONTRACT ADDRESS: ', loomContractAddress)
+    console.log('CONTRACT ADDRESS: ', contractAddress)
     this.setContract(contractAddress, abi)
   }
 }
