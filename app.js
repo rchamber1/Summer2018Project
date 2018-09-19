@@ -54,8 +54,8 @@ async function main(args) {
   const personaContract = new PersonaContract();
   await personaContract.initialize();
   await personaContract.registerContractEvents();
-  await personaContract.createPersona('Justin');
   startApp()
+  await personaContract.createPersona('Justin');
 }
 
 main();
