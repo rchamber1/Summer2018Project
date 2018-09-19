@@ -8,8 +8,6 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
 
-var personaContract;
-
 /* Web3 and Loom dealio  */
 
 function startApp() {
@@ -52,12 +50,12 @@ function startServer(app) {
   });
 }
 
-async function main() {
-  personaContract = new PersonaContract();
+async function main(args) {
+  const personaContract = new PersonaContract();
   await personaContract.initialize();
   await personaContract.registerContractEvents();
   await personaContract.createPersona('Justin');
-  startApp();
+  startApp()
 }
 
 main();

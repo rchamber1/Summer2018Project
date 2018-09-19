@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+profile=$1
+artifacts_bucket="s3://persona-builder-artifacts"
+contracts="loom-contracts"
+contracts_dir="./public/json/contracts"
+([ -d $contracts_dir ] || mkdir $contracts_dir) && pushd $contracts_dir > /dev/null
+
+aws --profile "$profile" --region "us-east-1" s3 cp $artifacts_bucket/$contracts . \
+    && \
+tar -xvzf loom-contracts \
+    && \
+rm loom-contracts
+
+[ $? -eq 0 ] && popd > /dev/null && node start.js

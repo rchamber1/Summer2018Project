@@ -1,5 +1,5 @@
 import Contract from './contract.js';
-import PersonaTokenJson from '../../json/PersonaToken.json';
+import PersonaTokenJson from '../../json/contracts/PersonaToken.json';
 
 export default class PersonaContract extends Contract {
 
