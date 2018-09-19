@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-profile='persona-builder'
+profile=${1:-'persona-builder'}
 artifacts_bucket='s3://persona-builder-artifacts'
 contracts='loom-contracts'
 contracts_dir="./public/json/contracts"
