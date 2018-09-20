@@ -34,15 +34,12 @@ export default class Contract {
     console.log(this.contract);
   }
 
-  async initialize(name, abi) {
+  async initialize(abi, address) {
     console.log('INITIALIZING')
     this.client = createLoomClient(LoomClientConfig.clientHost);
     console.log('initialized loom client')
     this.setWeb3Provider(this.client);
-    const loomContractAddress = await this.client.getContractAddressAsync(name)
-    const contractAddress = CryptoUtils.bytesToHexAddr(loomContractAddress.local.bytes)
-    console.log('LOOM CONTRACT ADDRESS: ', loomContractAddress)
-    console.log('CONTRACT ADDRESS: ', contractAddress)
-    this.setContract(contractAddress, abi)
+    console.log('LOOM CONTRACT ADDRESS: ', address)
+    this.setContract(address, abi)
   }
 }
