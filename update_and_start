@@ -16,4 +16,4 @@ rm $contracts
 retval=$?
 popd > /dev/null
 err_msg='Could not update solidity contracts. Exiting.'
-([ $retval -ne 0 ] && echo "$err_msg") || node start.js
+([ $retval -ne 0 ] && echo "$err_msg" && exit $retval) || node start.js
