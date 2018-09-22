@@ -1,5 +1,5 @@
-const express = require('express');
-var app = express();
+//const express = require('express');
+//var app = express();
 
 $(document).ready(() => {
     console.log("jQuery working!");
